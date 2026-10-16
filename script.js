@@ -513,3 +513,109 @@ document.addEventListener("submit", event => {
 });
 
 navigate("dashboard");
+
+/* ========================================
+   PERFIL DO USUÁRIO — SupportLab
+======================================== */
+
+const profileButton = document.getElementById("profile-button");
+const profileModal = document.getElementById("profile-modal");
+const profileForm = document.getElementById("profile-form");
+const profileName = document.getElementById("profile-name");
+const profileAvatar = document.getElementById("profile-avatar");
+const profileNameInput = document.getElementById("profile-name-input");
+const profileEmailInput = document.getElementById("profile-email-input");
+const closeProfileButton = document.getElementById("close-profile");
+
+const PROFILE_STORAGE_KEY = "supportlab-profile";
+
+function loadProfile() {
+  try {
+    const savedProfile = JSON.parse(
+      localStorage.getItem(PROFILE_STORAGE_KEY) || "null"
+    );
+
+    return savedProfile && typeof savedProfile === "object"
+      ? savedProfile
+      : { name: "Usuário", email: "" };
+  } catch {
+    return { name: "Usuário", email: "" };
+  }
+}
+
+function updateProfileDisplay() {
+  const name = currentProfile.name.trim() || "Usuário";
+
+  profileName.textContent = name;
+  profileAvatar.textContent = name.charAt(0).toLocaleUpperCase("pt-BR");
+}
+
+let currentProfile = loadProfile();
+
+function openProfileModal() {
+  profileNameInput.value = currentProfile.name;
+  profileEmailInput.value = currentProfile.email;
+
+  profileModal.classList.remove("hidden");
+  profileNameInput.focus();
+}
+
+function closeProfileModal() {
+  profileModal.classList.add("hidden");
+}
+
+profileButton.addEventListener("click", openProfileModal);
+
+profileButton.setAttribute("role", "button");
+profileButton.setAttribute("tabindex", "0");
+profileButton.setAttribute("aria-label", "Editar perfil");
+
+profileButton.addEventListener("keydown", event => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    openProfileModal();
+  }
+});
+
+closeProfileButton.addEventListener("click", closeProfileModal);
+
+profileModal.addEventListener("click", event => {
+  if (event.target === profileModal) {
+    closeProfileModal();
+  }
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && !profileModal.classList.contains("hidden")) {
+    closeProfileModal();
+  }
+});
+
+profileForm.addEventListener("submit", event => {
+  event.preventDefault();
+
+  const name = profileNameInput.value.trim();
+  const email = profileEmailInput.value.trim();
+
+  if (!name) {
+    profileNameInput.focus();
+    return;
+  }
+
+  currentProfile = { name, email };
+
+  try {
+    localStorage.setItem(
+      PROFILE_STORAGE_KEY,
+      JSON.stringify(currentProfile)
+    );
+
+    updateProfileDisplay();
+    closeProfileModal();
+  } catch (error) {
+    alert("Não foi possível salvar o perfil neste navegador.");
+    console.error("Erro ao salvar perfil:", error);
+  }
+});
+
+updateProfileDisplay();
