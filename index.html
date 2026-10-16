@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SupportLab | Simulador de Suporte</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">S</div>
+        <div>
+          <h2>SupportLab</h2>
+          <small>Support Simulator</small>
+        </div>
+      </div>
+
+      <p class="menu-label">MENU PRINCIPAL</p>
+
+      <nav>
+        <button class="nav-item active" data-page="dashboard">Dashboard</button>
+        <button class="nav-item" data-page="tickets">Tickets</button>
+        <button class="nav-item" data-page="customers">Clientes</button>
+        <button class="nav-item" data-page="knowledge">Central de ajuda</button>
+        <button class="nav-item" data-page="training">Treinamento</button>
+        <button class="nav-item" data-page="performance">Desempenho</button>
+        <button class="nav-item" data-page="portfolio">Meu portfólio</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <span class="status-dot"></span>
+        Ambiente de simulação
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">ESPAÇO DE TRABALHO</p>
+          <h1 id="page-title">Dashboard</h1>
+        </div>
+        <div class="profile">
+          <div class="avatar">U</div>
+          <span>Usuário</span>
+        </div>
+      </header>
+
+      <section id="app-content">
+        <div class="welcome">
+          <div>
+            <p class="eyebrow">CENTRAL DE ATENDIMENTO</p>
+            <h2>Bem-vindo ao SupportLab!</h2>
+            <p>Pratique atendimento ao cliente em um ambiente de simulação.</p>
+          </div>
+          <button class="primary-btn" id="new-ticket-btn">+ Novo ticket</button>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <p>Tickets abertos</p>
+            <h2 id="open-count">0</h2>
+          </div>
+          <div class="metric-card">
+            <p>Prioridade alta</p>
+            <h2 id="high-count">0</h2>
+          </div>
+          <div class="metric-card">
+            <p>Tickets resolvidos</p>
+            <h2 id="resolved-count">0</h2>
+          </div>
+          <div class="metric-card">
+            <p>Clientes cadastrados</p>
+            <h2 id="customer-count">0</h2>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <section class="panel">
+            <div class="panel-heading">
+              <h3>Tickets recentes</h3>
+              <button class="text-btn" data-page="tickets">Ver todos</button>
+            </div>
+            <div id="recent-tickets"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <h3>Ações rápidas</h3>
+            </div>
+            <button class="quick-action" data-page="tickets">Consultar tickets</button>
+            <button class="quick-action" data-page="customers">Consultar clientes</button>
+            <button class="quick-action" data-page="training">Praticar atendimento</button>
+            <button class="quick-action" data-page="knowledge">Consultar central de ajuda</button>
+          </section>
+        </div>
+
+        <p class="disclaimer">
+          Este é um ambiente de treinamento com dados fictícios, criado para praticar habilidades de suporte.
+        </p>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
